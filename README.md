@@ -39,6 +39,7 @@ A lightweight social network built with **Django** and **Bootstrap 5**.
 ![bob post_2](https://github.com/user-attachments/assets/8a29b4fa-0f99-426a-9557-d7288b1611d2)
 ![Clara profil_1](https://github.com/user-attachments/assets/3379b5ba-a6ac-4fb3-8ac9-0f231d86a107)
 ![Marley profil](https://github.com/user-attachments/assets/f4135144-a9f2-468b-86f9-85410b674031)
+![admin porj](https://github.com/user-attachments/assets/9cd5eef7-b551-4783-b1bf-c45e030f0bd8)
 
 ---
 
