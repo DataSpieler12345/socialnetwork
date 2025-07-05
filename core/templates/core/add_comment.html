@@ -1,0 +1,16 @@
+<!-- add_comment.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}Agregar comentario{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Comentar en: "{{ post.content }}"</h3>
+  <form method="post" class="mt-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar comentario</button>
+    <a href="{% url 'post_detail' post_id=post.id %}" class="btn btn-secondary ms-2">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

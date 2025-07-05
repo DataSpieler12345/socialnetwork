@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Feed{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+    <h2>📝 Crear nueva publicación</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </form>
+        </div>
+    </div>
+
+    <h3 class="mt-5">📰 Últimas publicaciones</h3>
+
+    {% for post in posts %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'profile' post.author.username %}">
+                        {{ post.author.username }}
+                    </a>
+                </h5>
+                <p class="card-text">{{ post.content }}</p>
+
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid rounded mb-2" alt="Imagen del post">
+                {% endif %}
+
+                <p class="text-muted mb-1">
+                    Publicado el {{ post.created_at|date:"d/m/Y H:i" }}
+                </p>
+
+                <form method="post" class="mb-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_post_id" value="{{ post.id }}">
+                    <div class="form-group">
+                        {{ comment_form.content }}
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">
+                        💬 Comentar
+                    </button>
+                </form>
+
+                <hr>
+                {% for comment in post.comments.all %}
+                    <div class="mb-2">
+                        <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+                        <small class="text-muted">({{ comment.created_at|date:"d/m/Y H:i" }})</small>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">Sin comentarios aún.</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

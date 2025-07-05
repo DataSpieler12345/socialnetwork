@@ -1,0 +1,35 @@
+<!-- post_detail.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}Detalle de publicación{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4>{{ post.author.username }}</h4>
+      <p>{{ post.content }}</p>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-fluid rounded mb-3">
+      {% endif %}
+      <small class="text-muted">Publicado {{ post.created_at|date:"d/m/Y H:i" }}</small>
+    </div>
+  </div>
+
+  <h5>Comentarios</h5>
+  {% if comments %}
+    {% for c in comments %}
+      <div class="mb-3">
+        <strong>{{ c.author.username }}</strong>:
+        {{ c.content }}
+        <br><small class="text-muted">{{ c.created_at|date:"d/m/Y H:i" }}</small>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-muted">Aún no hay comentarios.</p>
+  {% endif %}
+
+  <a href="{% url 'add_comment_to_post' post_id=post.id %}" class="btn btn-outline-primary">Añadir comentario</a>
+  <a href="{% url 'feed' %}" class="btn btn-link ms-2">← Volver al feed</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Seguidores de {{ profile_user.username }}{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h2>Seguidores de {{ profile_user.username }}</h2>
+    
+    {% if followers_users %}
+        <ul>
+            {% for user in followers_users %}
+                <li>
+                    <a href="{% url 'profile' user.username %}">{{ user.username }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ profile_user.username }} no tiene seguidores aún.</p>
+    {% endif %}
+    
+    <a href="{% url 'profile' profile_user.username %}" class="btn btn-outline-secondary">Volver al perfil</a>
+</div>
+{% endblock %}

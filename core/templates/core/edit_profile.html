@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Editar perfil{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card shadow-sm mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">✏️ Editar Perfil</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_avatar" class="form-label">Avatar</label>
+                    {{ form.avatar }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_bio" class="form-label">Biografía</label>
+                    {{ form.bio }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_location" class="form-label">Ubicación</label>
+                    {{ form.location }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_birth_date" class="form-label">Fecha de nacimiento</label>
+                    {{ form.birth_date }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_status" class="form-label">Estado</label>
+                    {{ form.status }}
+                </div>
+
+                <button type="submit" class="btn btn-success">💾 Guardar cambios</button>
+                <a href="{% url 'profile' user.username %}" class="btn btn-secondary ms-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
